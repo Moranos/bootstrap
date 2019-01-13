@@ -442,7 +442,9 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
 
             var unregisterTriggers = function() {
               triggers.show.forEach(function(trigger) {
-                element.unbind(trigger, showTooltipBind);
+                trigger.split(' ').forEach(function (showTrigger) {
+                  element[0].removeEventListener(showTrigger, showTooltipBind);
+                });
               });
               triggers.hide.forEach(function(trigger) {
                 trigger.split(' ').forEach(function(hideTrigger) {
